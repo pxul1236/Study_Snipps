@@ -14,14 +14,14 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 engine = create_engine(DATABASE_URL)
 
 #creating session
-SessionoLocal = sessionmaker(autocommit = False, autoflush= False, bind= engine)
+SessionLocal = sessionmaker(autocommit = False, autoflush= False, bind= engine)
 
 #base class for model
 Base = declarative_base()
 
 #func to get db session for fastapi
 def get_db():
-    db = SessionoLocal()
+    db = SessionLocal()
     try:
         yield db
     finally:
