@@ -11,7 +11,7 @@ class Course(Base):
     # Primary key
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
 
-    #user fields
+    #course fields
     course_code = Column(String, unique=True, nullable=False, index=True)
     course_name = Column(String, nullable=False)
     department = Column(String, nullable=False)
