@@ -1,0 +1,28 @@
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+import os
+from dotenv import load_dotenv
+
+#loading env variables form .env
+load_dotenv()
+
+#Db url from .env
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+#creating db engine
+engine = create_engine(DATABASE_URL)
+
+#creating session
+SessionoLocal = sessionmaker(autocommit = False, autoflush= False, bind= engine)
+
+#base class for model
+Base = declarative_base()
+
+#func to get db session for fastapi
+def get_db():
+    db = SessionoLocal()
+    try:
+        yield db
+    finally:
+        db.close()
