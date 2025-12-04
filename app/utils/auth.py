@@ -21,7 +21,7 @@ ALGORITHM = os.getenv("ALGORITHM")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
 
 # Password hashing context
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 
 # OAuth2 scheme for token authentication
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
@@ -29,13 +29,13 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 #PASSWORD FUNCTIONS
 
 def hash_password(password: str) -> str:
-    """Hash a plain password."""
+    password = password[:72]  # truncate STRING
     return pwd_context.hash(password)
 
-
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verify a plain password against a hashed password."""
+    plain_password = plain_password[:72]
     return pwd_context.verify(plain_password, hashed_password)
+
 
 # --- JWT TOKEN FUNCTIONS ---
 

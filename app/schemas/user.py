@@ -28,7 +28,7 @@ class UserResponse(UserBase):
 
 #Schema for JWT response
 class Token(BaseModel):
-    accss_token: str
+    access_token: str
     token_type: str
 
 #Schmea for tokendata
