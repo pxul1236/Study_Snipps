@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.user import User
@@ -68,14 +69,17 @@ def register_admin(user_data: UserCreate, db: Session = Depends(get_db)):
     return new_admin
 
 @router.post("/login", response_model=Token)
-def login(user_credentials: UserLogin, db: Session = Depends(get_db)):
+def login(
+    form_data: OAuth2PasswordRequestForm = Depends(),  # CHANGED THIS LINE
+    db: Session = Depends(get_db)
+):
     """Login and receive JWT token."""
     
-    # Find user by email
-    user = db.query(User).filter(User.email == user_credentials.email).first()
+    # Find user by email (username field contains email)
+    user = db.query(User).filter(User.email == form_data.username).first()
     
     # Verify user exists and password is correct
-    if not user or not verify_password(user_credentials.password, user.hashed_password):
+    if not user or not verify_password(form_data.password, user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid email or password",
