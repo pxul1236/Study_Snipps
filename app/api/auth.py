@@ -39,6 +39,33 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
     
     return new_user
 
+@router.post("/register-admin", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+def register_admin(user_data: UserCreate, db: Session = Depends(get_db)):
+    """Register a new admin user. (In production, protect this endpoint!)"""
+    
+    # Check if email already exists
+    existing_user = db.query(User).filter(User.email == user_data.email).first()
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email already registered"
+        )
+    
+    # Create new admin user
+    new_admin = User(
+        email=user_data.email,
+        hashed_password=hash_password(user_data.password),
+        first_name=user_data.first_name,
+        last_name=user_data.last_name,
+        university=user_data.university,
+        is_admin=True  # Make them admin
+    )
+    
+    db.add(new_admin)
+    db.commit()
+    db.refresh(new_admin)
+    
+    return new_admin
 
 @router.post("/login", response_model=Token)
 def login(user_credentials: UserLogin, db: Session = Depends(get_db)):

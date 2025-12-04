@@ -22,6 +22,7 @@ class UserLogin(BaseModel):
 #Schema for returning user data(no password)
 class UserResponse(UserBase):
     id: UUID
+    is_admin: bool
     created_at: datetime
     class Config:
         from_attributes = True
