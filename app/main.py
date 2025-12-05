@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api import auth, course
+from app.api import auth, course, note
 
 app = FastAPI(
     title="Study Snipps API",
@@ -10,6 +10,7 @@ app = FastAPI(
 # Include routers
 app.include_router(auth.router)
 app.include_router(course.router)
+app.include_router(note.router)
 
 @app.get("/")
 def root():
