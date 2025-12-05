@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, DateTime
+from sqlalchemy import Column, String, DateTime, Boolean
 from sqlalchemy.dialects.postgresql import UUID
 from datetime import datetime, timezone
 import uuid
@@ -17,6 +17,8 @@ class User(Base):
     last_name = Column(String, nullable=False)
     university = Column(String, nullable= True)
 
+    # Admin flag - NEW
+    is_admin = Column(Boolean, default=False, nullable=False)
     #Timestamps for creation/updation
 
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable= False)
