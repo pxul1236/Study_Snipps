@@ -18,10 +18,10 @@ class Note(Base):
     file_type = Column(String, nullable=False)
     
     #upvotes
-    upvote_counter = Column(Integer, default=0)
+    upvotes_count = Column(Integer, default=0, server_default='0', nullable=False)
 
     #Foreign key
-    created_by = Column(UUID(as_uuid=True), ForeignKey("courses.id"), nullable=False)
+    course_id = Column(UUID(as_uuid=True), ForeignKey("courses.id"), nullable=False)
     uploaded_by = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
 
     #Timestamps for creation/updation
