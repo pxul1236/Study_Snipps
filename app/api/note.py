@@ -10,7 +10,7 @@ from app.models.user import User
 from app.schemas.note import NoteCreate, NoteUpdate, NoteResponse, NoteWithUploader
 from app.utils.auth import get_current_user
 
-router = APIRouter(prefix="/note", tags=["Note"])
+router = APIRouter(tags=["Note"])
 
 
 @router.post("/", response_model=NoteResponse, status_code=status.HTTP_201_CREATED)

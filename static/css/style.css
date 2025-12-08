@@ -1,0 +1,236 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body - Clean white background */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header - Red bar like Paul's site */
+header {
+    background-color: #c41e3a;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 1.8em;
+    font-weight: normal;
+}
+
+header p {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+/* Navigation - Simple horizontal */
+nav {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    padding: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav li {
+    margin: 0;
+}
+
+nav a {
+    display: block;
+    padding: 15px 25px;
+    color: #0066cc;
+    text-decoration: none;
+    font-size: 1em;
+    border-right: 1px solid #ddd;
+}
+
+nav a:hover {
+    background-color: #e8e8e8;
+}
+
+/* Main content */
+main {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 30px;
+}
+
+/* Headings */
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: normal;
+    border-bottom: 2px solid #c41e3a;
+    padding-bottom: 10px;
+}
+
+h3 {
+    font-size: 1.3em;
+    margin: 20px 0 10px 0;
+    color: #333;
+    font-weight: normal;
+}
+
+/* Paragraphs */
+p {
+    margin: 15px 0;
+}
+
+/* Links */
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #551a8b;
+}
+
+/* Buttons */
+button, .btn {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 3px;
+}
+
+button:hover, .btn:hover {
+    background-color: #0052a3;
+    text-decoration: none;
+}
+
+/* Forms */
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    background-color: #fff;
+    border-radius: 3px;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #0066cc;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+    color: #333;
+}
+
+/* Course/Note cards */
+.card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 3px;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #0066cc;
+}
+
+.card h3 a {
+    color: #0066cc;
+}
+
+.card-meta {
+    color: #666;
+    font-size: 0.9em;
+    margin: 10px 0;
+}
+
+/* Lists */
+ul, ol {
+    margin: 20px 0;
+    padding-left: 40px;
+}
+
+li {
+    margin: 10px 0;
+}
+
+/* Footer */
+footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 50px;
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Messages */
+.message {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+}
+
+.error {
+    background-color: #fff0f0;
+    border-color: #ffcccc;
+    color: #cc0000;
+}
+
+.success {
+    background-color: #f0fff0;
+    border-color: #ccffcc;
+    color: #008000;
+}
+
+/* Hidden class */
+.hidden {
+    display: none;
+}
+
+/* Home page welcome section */
+.welcome-section {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 5px;
+    margin: 30px 0;
+}
+
+/* Search/Filter section */
+.filter-section {
+    background-color: #f5f5f5;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 3px;
+}

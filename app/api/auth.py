@@ -8,7 +8,7 @@ from app.utils.auth import hash_password, verify_password, create_access_token, 
 from datetime import timedelta
 import os
 
-router = APIRouter(prefix="/auth", tags=["Authentication"])
+router = APIRouter(tags=["Authentication"])
 
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
 

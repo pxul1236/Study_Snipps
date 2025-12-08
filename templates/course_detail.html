@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Notes - Study Snippets</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Study Snippets</h1>
+        <p>Share and discover university course notes</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/course">Browse Courses</a></li>
+            <li><a href="/upload">Upload Notes</a></li>
+            <li><a href="/auth" id="auth-link">Login</a></li>
+            <li><a href="/docs">API Docs</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div id="course-info">
+            <p>Loading course...</p>
+        </div>
+
+        <h2>Notes</h2>
+
+        <div style="margin: 20px 0;">
+            <label>Sort by:</label>
+            <select id="sort-select" onchange="loadNotes()">
+                <option value="recent">Most Recent</option>
+                <option value="popular">Most Popular</option>
+            </select>
+        </div>
+
+        <div id="notes-list">
+            <p>Loading notes...</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>Study Snippets &copy; 2024 | Built with FastAPI</p>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+    <script>
+        const courseId = "{{ course_id }}";
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            document.getElementById('auth-link').textContent = 'Logout';
+            document.getElementById('auth-link').onclick = () => {
+                localStorage.removeItem('token');
+                window.location.href = '/auth';
+            };
+        }
+
+        async function loadCourse() {
+            try {
+                const response = await fetch(`/api/courses/${courseId}`);
+                const course = await response.json();
+
+                document.getElementById('course-info').innerHTML = `
+                    <h2>${course.course_code} - ${course.course_name}</h2>
+                    <p class="card-meta">Department: ${course.department}</p>
+                    ${course.semester ? `<p class="card-meta">Semester: ${course.semester}</p>` : ''}
+                    ${course.description ? `<p>${course.description}</p>` : ''}
+                `;
+            } catch (error) {
+                document.getElementById('course-info').innerHTML = '<p class="error">Failed to load course.</p>';
+            }
+        }
+
+        async function loadNotes() {
+            const sortBy = document.getElementById('sort-select').value;
+            const url = `/api/notes/?course_id=${courseId}&sort_by=${sortBy}`;
+
+            try {
+                const response = await fetch(url);
+                const notes = await response.json();
+
+                const container = document.getElementById('notes-list');
+
+                if (notes.length === 0) {
+                    container.innerHTML = '<p>No notes available for this course yet. Be the first to upload!</p>';
+                    return;
+                }
+
+                container.innerHTML = notes.map(note => `
+                    <div class="card">
+                        <h3>${note.title}</h3>
+                        ${note.description ? `<p>${note.description}</p>` : ''}
+                        <p class="card-meta">Uploaded by: ${note.uploader_name} | Upvotes: ${note.upvotes_count}</p>
+                        <p class="card-meta">Type: ${note.file_type.toUpperCase()} | Date: ${new Date(note.created_at).toLocaleDateString()}</p>
+                        <a href="${note.file_url}" target="_blank" class="btn">View/Download</a>
+                    </div>
+                `).join('');
+            } catch (error) {
+                document.getElementById('notes-list').innerHTML = '<p class="error">Failed to load notes.</p>';
+            }
+        }
+
+        loadCourse();
+        loadNotes();
+    </script>
+</body>
+</html>
