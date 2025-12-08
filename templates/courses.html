@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browse Courses - Study Snippets</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
 </head>
 <body>
     <header>
@@ -54,7 +54,7 @@
 
         async function loadCourses() {
             const search = document.getElementById('search').value;
-            const url = search ? `/api/courses/?search=${search}` : '/api/course/';
+            const url = search ? `/api/course/?search=${search}` : '/api/course/';
 
             try {
                 const response = await fetch(url);

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Notes - Study Snippets</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
 </head>
 <body>
     <header>
@@ -61,7 +61,7 @@
 
         async function loadCourse() {
             try {
-                const response = await fetch(`/api/courses/${courseId}`);
+                const response = await fetch(`/api/course/${courseId}`);
                 const course = await response.json();
 
                 document.getElementById('course-info').innerHTML = `
@@ -77,7 +77,7 @@
 
         async function loadNotes() {
             const sortBy = document.getElementById('sort-select').value;
-            const url = `/api/notes/?course_id=${courseId}&sort_by=${sortBy}`;
+            const url = `/api/note/?course_id=${courseId}&sort_by=${sortBy}`;
 
             try {
                 const response = await fetch(url);

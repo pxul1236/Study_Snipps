@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Notes - Study Snippets</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
 </head>
 <body>
     <header>
@@ -115,7 +115,7 @@
             };
 
             try {
-                const response = await fetch('/api/notes/', {
+                const response = await fetch('/api/note/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
