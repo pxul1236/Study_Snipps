@@ -9,7 +9,7 @@ from app.models.user import User
 from app.schemas.course import CourseCreate, CourseUpdate, CourseResponse
 from app.utils.auth import get_current_user, get_current_admin
 
-router = APIRouter(prefix="/course", tags=["Course"])
+router = APIRouter(tags=["Course"])
 
 
 @router.post("/", response_model=CourseResponse, status_code=status.HTTP_201_CREATED)

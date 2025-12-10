@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Notes - Study Snippets</title>
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
+</head>
+<body>
+    <header>
+        <h1>Study Snippets</h1>
+        <p>Share and discover university course notes</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/course">Browse Courses</a></li>
+            <li><a href="/upload">Upload Notes</a></li>
+            <li><a href="/auth" id="auth-link">Login</a></li>
+            <li><a href="/docs">API Docs</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>Upload Notes</h2>
+
+        <div id="login-warning" class="message error hidden">
+            Please <a href="/auth">login</a> to upload notes.
+        </div>
+
+        <form id="upload-form">
+            <label>Course:</label>
+            <select id="course-select" required>
+                <option value="">Loading courses...</option>
+            </select>
+
+            <label>Note Title:</label>
+            <input type="text" id="note-title" required placeholder="e.g., Chapter 3 - Sorting Algorithms">
+
+            <label>Description (optional):</label>
+            <textarea id="note-description" rows="4" placeholder="Brief description of what these notes cover"></textarea>
+
+            <label>File URL (temporary - use a file hosting link):</label>
+            <input type="url" id="file-url" required placeholder="https://example.com/your-file.pdf">
+
+            <label>File Type:</label>
+            <select id="file-type" required>
+                <option value="pdf">PDF</option>
+                <option value="image">Image (PNG/JPG)</option>
+            </select>
+
+            <button type="submit">Upload Note</button>
+        </form>
+
+        <div id="message" class="message hidden"></div>
+
+        <div style="margin-top: 30px; padding: 20px; background-color: #ffffcc; border: 2px solid #000;">
+            <h3>Note about file uploads:</h3>
+            <p>For now, please upload your files to a free service like:</p>
+            <ul>
+                <li><a href="https://imgur.com" target="_blank">Imgur</a> (for images)</li>
+                <li><a href="https://drive.google.com" target="_blank">Google Drive</a> (get shareable link)</li>
+                <li><a href="https://www.dropbox.com" target="_blank">Dropbox</a> (get shareable link)</li>
+            </ul>
+            <p>Then paste the link above. File upload feature coming soon!</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>Study Snippets &copy; 2024 | Built with FastAPI</p>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+    <script>
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            document.getElementById('login-warning').classList.remove('hidden');
+            document.getElementById('upload-form').style.display = 'none';
+        } else {
+            document.getElementById('auth-link').textContent = 'Logout';
+            document.getElementById('auth-link').onclick = () => {
+                localStorage.removeItem('token');
+                window.location.href = '/auth';
+            };
+        }
+
+        // Load courses
+        async function loadCourses() {
+            try {
+                const response = await fetch('/api/course/');
+                const courses = await response.json();
+
+                const select = document.getElementById('course-select');
+                select.innerHTML = '<option value="">-- Select a course --</option>' +
+                    courses.map(c => `<option value="${c.id}">${c.course_code} - ${c.course_name}</option>`).join('');
+            } catch (error) {
+                document.getElementById('course-select').innerHTML = '<option value="">Failed to load courses</option>';
+            }
+        }
+
+        loadCourses();
+
+        // Upload form
+        document.getElementById('upload-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const noteData = {
+                title: document.getElementById('note-title').value,
+                description: document.getElementById('note-description').value || null,
+                file_url: document.getElementById('file-url').value,
+                file_type: document.getElementById('file-type').value,
+                course_id: document.getElementById('course-select').value
+            };
+
+            try {
+                const response = await fetch('/api/note/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(noteData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showMessage('Note uploaded successfully!', 'success');
+                    document.getElementById('upload-form').reset();
+                    setTimeout(() => {
+                        window.location.href = `/course/${noteData.course_id}`;
+                    }, 1500);
+                } else {
+                    showMessage(data.detail || 'Upload failed', 'error');
+                }
+            } catch (error) {
+                showMessage('Network error. Please try again.', 'error');
+            }
+        });
+
+        function showMessage(text, type) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = `message ${type}`;
+            msg.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

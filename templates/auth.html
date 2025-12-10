@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Sign Up - Study Snippets</title>
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
+</head>
+<body>
+    <header>
+        <h1>Study Snippets</h1>
+        <p>Share and discover university course notes</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/course">Browse Courses</a></li>
+            <li><a href="/upload">Upload Notes</a></li>
+            <li><a href="/auth" id="auth-link">Login</a></li>
+            <li><a href="/docs">API Docs</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Authentication</h2>
+
+        <!-- Login Form -->
+        <div id="login-section">
+            <h3>Login</h3>
+            <form id="login-form">
+                <label>Email:</label>
+                <input type="email" id="login-email" required>
+
+                <label>Password:</label>
+                <input type="password" id="login-password" required>
+
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up here</a></p>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signup-section" class="hidden">
+            <h3>Sign Up</h3>
+            <form id="signup-form">
+                <label>First Name:</label>
+                <input type="text" id="signup-firstname" required>
+
+                <label>Last Name:</label>
+                <input type="text" id="signup-lastname" required>
+
+                <label>Email:</label>
+                <input type="email" id="signup-email" required>
+
+                <label>Password (min 8 characters):</label>
+                <input type="password" id="signup-password" required minlength="8">
+
+                <label>University (optional):</label>
+                <input type="text" id="signup-university">
+
+                <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+        </div>
+
+        <div id="message" class="message hidden"></div>
+    </main>
+
+    <footer>
+        <p>Study Snippets &copy; 2024 | Built with FastAPI</p>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+    <script>
+        function showSignup() {
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('signup-section').classList.remove('hidden');
+        }
+
+        function showLogin() {
+            document.getElementById('signup-section').classList.add('hidden');
+            document.getElementById('login-section').classList.remove('hidden');
+        }
+
+        // Login form
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new URLSearchParams();
+            formData.append('username', document.getElementById('login-email').value);
+            formData.append('password', document.getElementById('login-password').value);
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('token', data.access_token);
+                    showMessage('Login successful! Redirecting...', 'success');
+                    setTimeout(() => window.location.href = '/course', 1500);
+                } else {
+                    showMessage(data.detail || 'Login failed', 'error');
+                }
+            } catch (error) {
+                showMessage('Network error. Please try again.', 'error');
+            }
+        });
+
+        // Signup form
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const userData = {
+                email: document.getElementById('signup-email').value,
+                password: document.getElementById('signup-password').value,
+                first_name: document.getElementById('signup-firstname').value,
+                last_name: document.getElementById('signup-lastname').value,
+                university: document.getElementById('signup-university').value || null
+            };
+
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showMessage('Account created! Please login.', 'success');
+                    setTimeout(showLogin, 1500);
+                } else {
+                    showMessage(data.detail || 'Signup failed', 'error');
+                }
+            } catch (error) {
+                showMessage('Network error. Please try again.', 'error');
+            }
+        });
+
+        function showMessage(text, type) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = `message ${type}`;
+            msg.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
