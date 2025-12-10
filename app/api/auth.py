@@ -40,7 +40,7 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
     
     return new_user
 
-@router.post("/register-admin", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+'''@router.post("/register-admin", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 def register_admin(user_data: UserCreate, db: Session = Depends(get_db)):
     """Register a new admin user. (In production, protect this endpoint!)"""
     
@@ -66,7 +66,8 @@ def register_admin(user_data: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_admin)
     
-    return new_admin
+    return new_admin 
+    '''
 
 @router.post("/login", response_model=Token)
 def login(
