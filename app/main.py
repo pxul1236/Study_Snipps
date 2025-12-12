@@ -8,7 +8,7 @@ app = FastAPI(
     title="Study Snipps API",
     description="API for sharing university course notes",
     version="1.0.0",
-    docs_url=None #use /docs to get apidocs
+    #docs_url=None #use /docs to get apidocs
 )
 
 # Mount static files (CSS, JS)
