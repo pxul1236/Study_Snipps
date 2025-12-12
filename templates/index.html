@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Snippets - University Notes Sharing</title>
-    <link rel="stylesheet" href="/static/css/style.css?v=2">
-    <link rel="icon" type="image/png" href="/static/star.png">
- 
+    <title>Study Snipps - University Notes Sharing</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/static/star.png">
+
+    <!-- Google Font: Space Grotesk -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/static/css/style.css?v=3">
 </head>
 <body>
-    <header>
-        <h1>Study Snippets</h1>
-        <p>Share and discover university course notes</p>
+    <header class="header">
+        <div>
+            <h1>Study Snipps</h1>
+        </div>
     </header>
 
-    <nav>
+    <nav class="navbar">
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/course">Browse Courses</a></li>
@@ -26,8 +32,8 @@
 
     <main>
         <h2>Welcome to Study Snipps</h2>
-        
-        <p>A simple platform for university students to share and access course notes.</p>
+
+        <p>A retro-inspired platform for university students to share and access course notes effortlessly.</p>
 
         <h3>Features:</h3>
         <ul>
@@ -45,7 +51,7 @@
             <li><a href="/upload">Upload your own notes</a> to help others</li>
         </ol>
 
-        <div style="margin-top: 30px;">
+        <div class="button-container">
             <a href="/courses" class="btn">Browse Courses</a>
             <a href="/auth" class="btn">Get Started</a>
         </div>

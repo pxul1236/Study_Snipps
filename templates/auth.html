@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login / Sign Up - Study Snippets</title>
-    <link rel="stylesheet" href="/static/css/style.css?v=2">
+    <title>Login / Sign Up - Study Snipps</title>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/static/star.png">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/style.css?v=3">
 </head>
 <body>
-    <header>
-        <h1>Study Snippets</h1>
-        <p>Share and discover university course notes</p>
+    <header class="header">
+        
+        <div>
+            <h1>Study Snipps</h1>
+        </div>
     </header>
 
-    <nav>
+    <nav class="navbar">
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/course">Browse Courses</a></li>
@@ -21,6 +29,7 @@
             <li><a href="/auth" id="auth-link">Login</a></li>
         </ul>
     </nav>
+
     <main>
         <h2>Authentication</h2>
 
@@ -34,7 +43,7 @@
                 <label>Password:</label>
                 <input type="password" id="login-password" required>
 
-                <button type="submit">Login</button>
+                <button type="submit" class="btn">Login</button>
             </form>
             <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up here</a></p>
         </div>
@@ -58,7 +67,7 @@
                 <label>University (optional):</label>
                 <input type="text" id="signup-university">
 
-                <button type="submit">Sign Up</button>
+                <button type="submit" class="btn">Sign Up</button>
             </form>
             <p>Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
         </div>
@@ -67,7 +76,7 @@
     </main>
 
     <footer>
-        <p>Study Snippets &copy; 2024 | Built with FastAPI</p>
+        <p>Study Snipps &copy; 2025 | Built with FastAPI</p>
     </footer>
 
     <script src="/static/js/main.js"></script>

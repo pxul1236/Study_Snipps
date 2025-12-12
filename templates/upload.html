@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Notes - Study Snippets</title>
-    <link rel="stylesheet" href="/static/css/style.css?v=2">
+    <title>Upload Notes - Study Snipps</title>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/static/star.png">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght:400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/style.css?v=3">
 </head>
 <body>
-    <header>
-        <h1>Study Snippets</h1>
-        <p>Share and discover university course notes</p>
+
+    <header class="header">
+        <div>
+            <h1>Study Snipps</h1>
+        </div>
     </header>
 
-    <nav>
+    <nav class="navbar">
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/course">Browse Courses</a></li>
@@ -55,20 +63,20 @@
 
         <div id="message" class="message hidden"></div>
 
-        <div style="margin-top: 30px; padding: 20px; background-color: #ffffcc; border: 2px solid #000;">
+        <div style="margin-top: 30px; padding: 20px; background-color: #000000; border: 2px solid #000;">
             <h3>Note about file uploads:</h3>
             <p>For now, please upload your files to a free service like:</p>
             <ul>
                 <li><a href="https://imgur.com" target="_blank">Imgur</a> (for images)</li>
-                <li><a href="https://drive.google.com" target="_blank">Google Drive</a> (get shareable link)</li>
-                <li><a href="https://www.dropbox.com" target="_blank">Dropbox</a> (get shareable link)</li>
+                <li><a href="https://drive.google.com" target="_blank">Google Drive</a></li>
+                <li><a href="https://www.dropbox.com" target="_blank">Dropbox</a></li>
             </ul>
             <p>Then paste the link above. File upload feature coming soon!</p>
         </div>
     </main>
 
     <footer>
-        <p>Study Snippets &copy; 2024 | Built with FastAPI</p>
+        <p>Study Snipps &copy; 2025 | Built with FastAPI</p>
     </footer>
 
     <script src="/static/js/main.js"></script>
