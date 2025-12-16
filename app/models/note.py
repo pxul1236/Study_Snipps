@@ -18,7 +18,7 @@ class Note(Base):
     file_type = Column(String, nullable=False)
     
     #upvotes
-    upvotes_count = Column(Integer, default=0, server_default='0', nullable=False)
+    #upvotes_count = Column(Integer, default=0, server_default='0', nullable=False)
 
     #Foreign key
     course_id = Column(UUID(as_uuid=True), ForeignKey("courses.id"), nullable=False)

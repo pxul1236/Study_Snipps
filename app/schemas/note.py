@@ -26,7 +26,7 @@ class NoteUpdate(BaseModel):
 class NoteResponse(NoteBase):
     id: UUID
     uploaded_by: UUID
-    upvotes_count: int
+    #upvotes_count: int
     created_at: datetime
     updated_at: datetime
     
