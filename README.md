@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 What is this?
+## What is this?
 
 A simple place where students can upload and share their course notes without all the bloat of traditional LMS platforms.
 
@@ -16,12 +16,12 @@ No fancy features. No complicated UI. Just notes, courses, and students helping 
 
 ## Features
 
-- 🔐 **User Authentication** - Secure signup/login with JWT tokens
-- 👨‍💼 **Admin System** - Admins manage courses, students share notes
-- 📝 **Course Management** - Browse courses by department, semester, or search
-- 📤 **Note Uploads** - Share your handwritten or typed notes with others
-- 🔍 **Smart Search** - Find notes by course, title, or content
-- 🚀 **Fast API** - Built with FastAPI for blazing-fast performance
+-  **User Authentication** - Secure signup/login with JWT tokens
+-  **Admin System** - Admins manage courses, students share notes
+-  **Course Management** - Browse courses by department, semester, or search
+-  **Note Uploads** - Share your handwritten or typed notes with others
+-  **Smart Search** - Find notes by course, title, or content
+-  **Fast API** - Built with FastAPI for blazing-fast performance
 
 ---
 
@@ -189,7 +189,7 @@ Study_Snipps/
 
 ---
 
-## 🐛 Known Issues
+## Known Issues
 
 - File uploads currently require external hosting (Google Drive, Imgur, etc.)
 - No email verification yet
