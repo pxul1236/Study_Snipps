@@ -1,4 +1,4 @@
-# 📚 Study Snippets
+# Study Snippets
 
 > A clean, minimalist platform for university students to share and discover course notes.
 
@@ -14,7 +14,7 @@ No fancy features. No complicated UI. Just notes, courses, and students helping 
 
 ---
 
-## ✨ Features
+## Features
 
 - 🔐 **User Authentication** - Secure signup/login with JWT tokens
 - 👨‍💼 **Admin System** - Admins manage courses, students share notes
@@ -25,7 +25,7 @@ No fancy features. No complicated UI. Just notes, courses, and students helping 
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 **Backend:**
 - [FastAPI](https://fastapi.tiangolo.com/) - Modern Python web framework
@@ -118,7 +118,7 @@ No fancy features. No complicated UI. Just notes, courses, and students helping 
 
 ---
 
-## 📖 Usage
+## Usage
 
 ### For Students:
 
@@ -150,7 +150,7 @@ UPDATE users SET is_admin = true WHERE email = 'your-email@example.com';
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 ```
 Study_Snipps/
 ├── app/
@@ -177,7 +177,7 @@ Study_Snipps/
 
 ---
 
-## 🔒 Security Features
+## Security Features
 
 - ✅ **Password hashing** with Argon2 (industry standard)
 - ✅ **JWT authentication** with token expiry
@@ -199,7 +199,7 @@ Study_Snipps/
 ---
 
 
-## 🤝 Contributing
+## Contributing
 
 This is a learning project, but contributions are welcome! If you want to add features or fix bugs:
 
@@ -211,7 +211,7 @@ This is a learning project, but contributions are welcome! If you want to add fe
 
 ---
 
-## 📝 API Documentation
+## API Documentation
 
 Once running, visit `/docs` for interactive API documentation (Swagger UI).
 
